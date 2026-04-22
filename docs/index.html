@@ -33,7 +33,6 @@
         <a class="button primary" href="https://openreview.net/forum?id=En9aRT4uz8">Paper</a>
         <a class="button" href="https://github.com/diiogofernands/digitalhuman/tree/main/papers/episodic-memory">Code</a>
         <a class="button" href="#results">Results</a>
-        <a class="button" href="#citation">BibTeX</a>
       </div>
     </div>
   </header>
@@ -41,10 +40,10 @@
   <main>
     <section class="section teaser">
       <div class="container">
-        <img class="hero-figure" src="assets/images/overview.svg" alt="Overview of the ReSuME pipeline.">
+        <img class="hero-figure" src="assets/images/overview.png" alt="Official Figure 1 from the paper showing the ReSuME pipeline.">
         <p class="caption">
-          ReSuME monitors hidden states from a frozen LLM, projects them through a sparse autoencoder,
-          and uses calibrated reconstruction residuals to decide when a turn should enter episodic memory.
+          Hidden states from a frozen LLM are projected through a Sparse Autoencoder trained on routine
+          activations, yielding a geometry-aware reconstruction residual that governs episodic memory writes.
         </p>
       </div>
     </section>
@@ -123,20 +122,19 @@
       <div class="container">
         <h2>Selected Figures</h2>
         <p class="section-intro">
-          The panels below are web-friendly recreations based on the paper's experimental narrative, designed
-          for project-page presentation.
+          Official figures extracted from the paper PDF.
         </p>
         <div class="figure-grid">
           <figure class="panel">
-            <img src="assets/images/temporal-dynamics.svg" alt="Stylized temporal dynamics of surprise across routine, critical, and OOD regimes.">
+            <img src="assets/images/temporal-dynamics.png" alt="Official Figure 2 showing temporal dynamics of the surprise signal across routine, critical, and OOD regimes.">
             <figcaption>
-              Surprise stays low during routine segments, spikes on critical state changes, and remains noisier under OOD inputs.
+              Temporal dynamics of the surprise signal across Routine, Critical, and OOD regimes, with writes triggered on sustained supra-threshold deviations.
             </figcaption>
           </figure>
           <figure class="panel">
-            <img src="assets/images/residual-geometry.svg" alt="Stylized residual geometry plot showing routine, critical, and OOD clustering.">
+            <img src="assets/images/memory-tradeoff.png" alt="Official Figure 5 showing the memory-performance trade-off for episodic selection policies.">
             <figcaption>
-              Residual-space structure is not random noise: routine states cluster tightly, critical states form coherent deviations, and OOD states spread more diffusely.
+              Memory-performance trade-off for episodic selection policies, showing SAE-gated surprise dominating competing write strategies across budgets.
             </figcaption>
           </figure>
         </div>
@@ -250,21 +248,6 @@
       </div>
     </section>
 
-    <section class="section" id="citation">
-      <div class="container narrow">
-        <h2>Citation</h2>
-        <div class="citation-box">
-          <pre id="bibtex">@inproceedings{ferreira2026episodic,
-  title={Episodic Memory from Compression Boundaries in Latent Representation Space},
-  author={David Oneil Campos Ferreira and Priscila Rocha Maia Freitas Ribeiro and Emanuel Borges Passinato and Diogo Fernandes Costa Silva and Arlindo Rodrigues Galvao Filho},
-  booktitle={ICLR 2026 Workshop on Memory for LLM-Based Agentic Systems},
-  year={2026},
-  url={https://openreview.net/forum?id=En9aRT4uz8}
-}</pre>
-          <button class="button copy-button" type="button" onclick="copyBibtex()">Copy BibTeX</button>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="footer">
@@ -273,19 +256,5 @@
       <a href="https://github.com/diiogofernands/digitalhuman/tree/main/papers/episodic-memory">Paper Code</a>
     </div>
   </footer>
-
-  <script>
-    function copyBibtex() {
-      const text = document.getElementById('bibtex').innerText;
-      navigator.clipboard.writeText(text).then(function () {
-        const button = document.querySelector('.copy-button');
-        const original = button.textContent;
-        button.textContent = 'Copied';
-        setTimeout(function () {
-          button.textContent = original;
-        }, 1400);
-      });
-    }
-  </script>
 </body>
 </html>

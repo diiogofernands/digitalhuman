@@ -66,20 +66,6 @@ print(result["surprise_metrics"].surprise_score, result["stored_in_memory"])
 └── .gitignore
 ```
 
-## Citation
-
-If this repository helps your research, please cite:
-
-```bibtex
-@inproceedings{ferreira2026episodic,
-  title={Episodic Memory from Compression Boundaries in Latent Representation Space},
-  author={David Oneil Campos Ferreira and Priscila Rocha Maia Freitas Ribeiro and EMANUEL BORGES PASSINATO and Diogo Fernandes Costa Silva and Arlindo Rodrigues Galvao Filho},
-  booktitle={ICLR 2026 Workshop on Memory for LLM-Based Agentic Systems},
-  year={2026},
-  url={https://openreview.net/forum?id=En9aRT4uz8}
-}
-```
-
 ## Acknowledgements
 
 This codebase builds on open-source tooling from PyTorch, Hugging Face Transformers, and the broader mechanistic interpretability / sparse autoencoder ecosystem.
