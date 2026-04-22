@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReSuME | Representational Surprise-based Memory for LLM Agents</title>
+  <meta name="description" content="Project page for ReSuME: episodic memory for LLM agents driven by representational surprise and sparse autoencoders.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">ICLR 2026 Workshop MemAgents</p>
+      <h1>ReSuME: Episodic Memory from Compression Boundaries in Latent Representation Space</h1>
+      <p class="subtitle">
+        An unsupervised memory mechanism for LLM agents where episodic writes are triggered by
+        representational surprise measured through sparse autoencoder reconstruction failure.
+      </p>
+
+      <div class="authors">
+        <span>David O. C. Ferreira</span>
+        <span>Priscila R. M. F. Ribeiro</span>
+        <span>Emanuel B. Passinato</span>
+        <span>Diogo F. C. Silva</span>
+        <span>Arlindo R. Galvao Filho</span>
+      </div>
+
+      <p class="affiliation">
+        Advanced Knowledge Center for Immersive Technologies (AKCIT), Federal University of Goias
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="https://openreview.net/forum?id=En9aRT4uz8">Paper</a>
+        <a class="button" href="https://github.com/diiogofernands/digitalhuman/tree/main/papers/episodic-memory">Code</a>
+        <a class="button" href="#results">Results</a>
+        <a class="button" href="#citation">BibTeX</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section teaser">
+      <div class="container">
+        <img class="hero-figure" src="assets/images/overview.svg" alt="Overview of the ReSuME pipeline.">
+        <p class="caption">
+          ReSuME monitors hidden states from a frozen LLM, projects them through a sparse autoencoder,
+          and uses calibrated reconstruction residuals to decide when a turn should enter episodic memory.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="abstract">
+      <div class="container narrow">
+        <h2>Abstract</h2>
+        <p>
+          Long-term memory in Large Language Model agents requires selectivity: only a subset of interactions
+          should be consolidated beyond the current context window. ReSuME approaches this as a geometric
+          problem. We approximate the manifold of routine LLM activations with Sparse Autoencoders and define
+          representational surprise as reconstruction error relative to that learned manifold. Turns that resist
+          compression are treated as episodically salient. Across multi-turn dialogue settings, this surprise signal
+          separates routine, critical, and out-of-distribution states while improving the performance-memory
+          trade-off under fixed budgets.
+        </p>
+      </div>
+    </section>
+
+    <section class="section alt" id="highlights">
+      <div class="container">
+        <h2>Why ReSuME</h2>
+        <div class="cards three">
+          <article class="card">
+            <h3>Intrinsic Memory Signal</h3>
+            <p>
+              Memory writes are not driven by hand-crafted prompts or lexical novelty. They emerge from the
+              model's own latent geometry.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Budget-Aware Writes</h3>
+            <p>
+              ReSuME only stores turns whose normalized residual exceeds a calibrated threshold, keeping the
+              memory bank selective under fixed capacity.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Cross-Domain Robustness</h3>
+            <p>
+              Surprise remains discriminative across conversational, legal, medical, code, finance, and science
+              domains, supporting portable memory calibration.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="method">
+      <div class="container">
+        <div class="split">
+          <div>
+            <h2>Method</h2>
+            <ol class="steps">
+              <li>Extract a pooled user-turn representation from a fixed transformer layer.</li>
+              <li>Reconstruct the turn with a Sparse Autoencoder trained on routine activations.</li>
+              <li>Measure surprise from the residual magnitude and normalize it with robust rolling statistics.</li>
+              <li>Write only turns whose smoothed surprise score exceeds the memory threshold.</li>
+              <li>Retrieve memories independently by cosine similarity at inference time.</li>
+            </ol>
+          </div>
+          <div class="equation-box">
+            <h3>Core Signal</h3>
+            <p><code>e_t = ||x_t - x_hat_t||_2</code></p>
+            <p><code>s_t = alpha * u_t + (1 - alpha) * s_(t-1)</code></p>
+            <p><code>write if s_t &gt; tau</code></p>
+            <p class="small-note">
+              The write gate and use gate are decoupled: surprise controls storage, similarity controls retrieval.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="figures">
+      <div class="container">
+        <h2>Selected Figures</h2>
+        <p class="section-intro">
+          The panels below are web-friendly recreations based on the paper's experimental narrative, designed
+          for project-page presentation.
+        </p>
+        <div class="figure-grid">
+          <figure class="panel">
+            <img src="assets/images/temporal-dynamics.svg" alt="Stylized temporal dynamics of surprise across routine, critical, and OOD regimes.">
+            <figcaption>
+              Surprise stays low during routine segments, spikes on critical state changes, and remains noisier under OOD inputs.
+            </figcaption>
+          </figure>
+          <figure class="panel">
+            <img src="assets/images/residual-geometry.svg" alt="Stylized residual geometry plot showing routine, critical, and OOD clustering.">
+            <figcaption>
+              Residual-space structure is not random noise: routine states cluster tightly, critical states form coherent deviations, and OOD states spread more diffusely.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="container">
+        <h2>Main Results</h2>
+        <div class="metrics-grid">
+          <article class="metric-card">
+            <span class="metric-value">0.998</span>
+            <span class="metric-label">AUC on Routine vs. Critical</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-value">1.000</span>
+            <span class="metric-label">AUC on Routine vs. OOD</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-value">0.806-0.912</span>
+            <span class="metric-label">Cross-domain AUC range</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-value">+6.4</span>
+            <span class="metric-label">Gain over RAG on LongMemEval</span>
+          </article>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Competency</th>
+                <th>Task</th>
+                <th>RAG</th>
+                <th>ReSuME</th>
+                <th>Delta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AR</td>
+                <td>SH-Doc QA</td>
+                <td>79.3</td>
+                <td>83.0</td>
+                <td>+3.7</td>
+              </tr>
+              <tr>
+                <td>AR</td>
+                <td>LongMemEval</td>
+                <td>61.9</td>
+                <td>68.3</td>
+                <td>+6.4</td>
+              </tr>
+              <tr>
+                <td>TTL</td>
+                <td>CLINC150</td>
+                <td>88.6</td>
+                <td>93.0</td>
+                <td>+4.4</td>
+              </tr>
+              <tr>
+                <td>TTL</td>
+                <td>Movie Rec</td>
+                <td>19.0</td>
+                <td>25.0</td>
+                <td>+6.0</td>
+              </tr>
+              <tr>
+                <td>SF</td>
+                <td>FactConsol-SH</td>
+                <td>37.6</td>
+                <td>43.8</td>
+                <td>+6.2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="contributions">
+      <div class="container">
+        <h2>Contributions</h2>
+        <div class="cards two">
+          <article class="card">
+            <h3>Geometric formulation of episodic memory</h3>
+            <p>
+              ReSuME reframes memory writing as compression failure relative to a learned manifold of routine latent states.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Geometry-aware surprise</h3>
+            <p>
+              Covariance-aware residual modeling improves separation between critical and out-of-distribution turns.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Layer-dependent stratification</h3>
+            <p>
+              Intermediate layers better capture critical state changes, while deeper layers more strongly isolate OOD anomalies.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Better performance under memory constraints</h3>
+            <p>
+              Surprise-gated writing achieves a stronger performance-memory frontier than heuristic and similarity-based alternatives.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="citation">
+      <div class="container narrow">
+        <h2>Citation</h2>
+        <div class="citation-box">
+          <pre id="bibtex">@inproceedings{ferreira2026episodic,
+  title={Episodic Memory from Compression Boundaries in Latent Representation Space},
+  author={David Oneil Campos Ferreira and Priscila Rocha Maia Freitas Ribeiro and Emanuel Borges Passinato and Diogo Fernandes Costa Silva and Arlindo Rodrigues Galvao Filho},
+  booktitle={ICLR 2026 Workshop on Memory for LLM-Based Agentic Systems},
+  year={2026},
+  url={https://openreview.net/forum?id=En9aRT4uz8}
+}</pre>
+          <button class="button copy-button" type="button" onclick="copyBibtex()">Copy BibTeX</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>ReSuME Project Page</span>
+      <a href="https://github.com/diiogofernands/digitalhuman/tree/main/papers/episodic-memory">Paper Code</a>
+    </div>
+  </footer>
+
+  <script>
+    function copyBibtex() {
+      const text = document.getElementById('bibtex').innerText;
+      navigator.clipboard.writeText(text).then(function () {
+        const button = document.querySelector('.copy-button');
+        const original = button.textContent;
+        button.textContent = 'Copied';
+        setTimeout(function () {
+          button.textContent = original;
+        }, 1400);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="28" fill="#FBFCFF"/>
+  <text x="600" y="72" text-anchor="middle" fill="#101828" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">Residual Geometry in Latent Space</text>
+  <text x="600" y="108" text-anchor="middle" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="22">Stylized recreation of residual-space separation reported in the appendix</text>
+
+  <rect x="120" y="170" width="960" height="620" rx="20" fill="white" stroke="#D9E0EC" stroke-width="2"/>
+  <line x1="210" y1="680" x2="990" y2="680" stroke="#98A2B3" stroke-width="2"/>
+  <line x1="210" y1="680" x2="210" y2="240" stroke="#98A2B3" stroke-width="2"/>
+  <text x="1000" y="704" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="20">PC1</text>
+  <text x="182" y="228" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="20">PC2</text>
+
+  <g fill="#5DADE2" fill-opacity="0.55">
+    <circle cx="510" cy="600" r="12"/><circle cx="550" cy="570" r="12"/><circle cx="590" cy="545" r="12"/>
+    <circle cx="620" cy="515" r="12"/><circle cx="660" cy="490" r="12"/><circle cx="690" cy="462" r="12"/>
+    <circle cx="730" cy="436" r="12"/><circle cx="760" cy="410" r="12"/><circle cx="800" cy="390" r="12"/>
+    <circle cx="540" cy="642" r="12"/><circle cx="582" cy="614" r="12"/><circle cx="642" cy="556" r="12"/>
+    <circle cx="710" cy="520" r="12"/><circle cx="744" cy="472" r="12"/><circle cx="786" cy="440" r="12"/>
+    <circle cx="828" cy="410" r="12"/><circle cx="860" cy="378" r="12"/>
+  </g>
+
+  <g fill="#E67E22" fill-opacity="0.58">
+    <circle cx="420" cy="370" r="11"/><circle cx="470" cy="336" r="11"/><circle cx="510" cy="318" r="11"/>
+    <circle cx="556" cy="292" r="11"/><circle cx="602" cy="266" r="11"/><circle cx="642" cy="250" r="11"/>
+    <circle cx="680" cy="286" r="11"/><circle cx="722" cy="310" r="11"/><circle cx="760" cy="334" r="11"/>
+    <circle cx="540" cy="362" r="11"/><circle cx="598" cy="332" r="11"/><circle cx="656" cy="304" r="11"/>
+    <circle cx="704" cy="278" r="11"/><circle cx="742" cy="256" r="11"/><circle cx="790" cy="366" r="11"/>
+  </g>
+
+  <g fill="#D35454" fill-opacity="0.60">
+    <circle cx="350" cy="520" r="11"/><circle cx="410" cy="460" r="11"/><circle cx="460" cy="420" r="11"/>
+    <circle cx="520" cy="380" r="11"/><circle cx="580" cy="340" r="11"/><circle cx="620" cy="450" r="11"/>
+    <circle cx="664" cy="410" r="11"/><circle cx="712" cy="370" r="11"/><circle cx="760" cy="336" r="11"/>
+    <circle cx="820" cy="314" r="11"/><circle cx="844" cy="462" r="11"/><circle cx="882" cy="428" r="11"/>
+    <circle cx="908" cy="390" r="11"/><circle cx="938" cy="350" r="11"/><circle cx="968" cy="318" r="11"/>
+  </g>
+
+  <rect x="850" y="208" width="180" height="120" rx="16" fill="#F8FAFF" stroke="#D9E0EC"/>
+  <circle cx="882" cy="240" r="9" fill="#5DADE2" fill-opacity="0.7"/>
+  <text x="906" y="246" fill="#344054" font-family="Arial, Helvetica, sans-serif" font-size="20">Routine</text>
+  <circle cx="882" cy="276" r="9" fill="#D35454" fill-opacity="0.7"/>
+  <text x="906" y="282" fill="#344054" font-family="Arial, Helvetica, sans-serif" font-size="20">Critical</text>
+  <circle cx="882" cy="312" r="9" fill="#E67E22" fill-opacity="0.75"/>
+  <text x="906" y="318" fill="#344054" font-family="Arial, Helvetica, sans-serif" font-size="20">OOD</text>
+
+  <text x="600" y="842" text-anchor="middle" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="20">Routine residuals cluster tightly, critical deviations align directionally, and OOD states spread more broadly across latent residual space.</text>
+</svg>

@@ -1,0 +1,30 @@
+# Example configuration for the synthetic ReSuME pipeline
+
+sae:
+  model_name: "davidoneil/sae-per-layer-persona"
+  layer: null
+  input_dim: 4096
+  hidden_dim: 16384
+  sparsity_coefficient: 0.1
+
+surprise:
+  threshold: 2.0
+  use_adaptive: true
+  window_size: 100
+
+memory:
+  max_size: 100
+  eviction_policy: "lowest_surprise"
+
+llm:
+  model_name: "meta-llama/Llama-3.2-3B-Instruct"
+  layer_index: -1
+  device: "cuda"
+
+experiment:
+  seed: 42
+  use_real_llm: false
+  n_routine_states: 50
+  n_critical_states: 10
+  n_ood_states: 5
+  state_dim: 4096

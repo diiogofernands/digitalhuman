@@ -1,0 +1,46 @@
+<svg width="1600" height="880" viewBox="0 0 1600 880" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="880" rx="32" fill="#F7F9FE"/>
+  <rect x="56" y="56" width="1488" height="768" rx="28" fill="white" stroke="#D9E0EC" stroke-width="2"/>
+  <text x="800" y="120" text-anchor="middle" fill="#101828" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="700">ReSuME: Surprise-Gated Episodic Memory</text>
+  <text x="800" y="162" text-anchor="middle" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="24">Latent reconstruction failure as an intrinsic memory-writing signal for LLM agents</text>
+
+  <rect x="130" y="245" width="280" height="150" rx="28" fill="#DCEAFE" stroke="#B9CCF4" stroke-width="2"/>
+  <text x="270" y="312" text-anchor="middle" fill="#16345B" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700">LLM Agent</text>
+  <text x="270" y="352" text-anchor="middle" fill="#4F709A" font-family="Arial, Helvetica, sans-serif" font-size="22">hidden state x_t</text>
+
+  <rect x="500" y="245" width="310" height="150" rx="28" fill="#FCE0E7" stroke="#F1B5C5" stroke-width="2"/>
+  <text x="655" y="312" text-anchor="middle" fill="#6B1E34" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Sparse Autoencoder</text>
+  <text x="655" y="352" text-anchor="middle" fill="#9A5567" font-family="Arial, Helvetica, sans-serif" font-size="22">reconstruct x_hat_t</text>
+
+  <rect x="900" y="245" width="250" height="150" rx="28" fill="#FFE7BE" stroke="#F5C874" stroke-width="2"/>
+  <text x="1025" y="312" text-anchor="middle" fill="#734600" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Surprise Score</text>
+  <text x="1025" y="352" text-anchor="middle" fill="#9D742B" font-family="Arial, Helvetica, sans-serif" font-size="22">e_t and z_t</text>
+
+  <rect x="510" y="525" width="580" height="180" rx="30" fill="#DCF7EA" stroke="#B5E5CB" stroke-width="2"/>
+  <text x="800" y="590" text-anchor="middle" fill="#16543A" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">Episodic Memory</text>
+  <text x="800" y="625" text-anchor="middle" fill="#488C6E" font-family="Arial, Helvetica, sans-serif" font-size="22">fixed budget, surprise-driven writes, similarity-based retrieval</text>
+
+  <rect x="585" y="646" width="82" height="34" rx="10" fill="white" stroke="#B5E5CB"/>
+  <rect x="690" y="646" width="82" height="34" rx="10" fill="white" stroke="#B5E5CB"/>
+  <rect x="795" y="646" width="82" height="34" rx="10" fill="white" stroke="#B5E5CB"/>
+  <rect x="900" y="646" width="82" height="34" rx="10" fill="white" stroke="#B5E5CB"/>
+
+  <path d="M410 320H500" stroke="#385170" stroke-width="10" stroke-linecap="round"/>
+  <path d="M481 300L515 320L481 340" fill="#385170"/>
+
+  <path d="M810 320H900" stroke="#385170" stroke-width="10" stroke-linecap="round"/>
+  <path d="M881 300L915 320L881 340" fill="#385170"/>
+
+  <path d="M1025 395V505" stroke="#2B8B57" stroke-width="10" stroke-linecap="round" stroke-dasharray="16 18"/>
+  <path d="M1005 485L1025 520L1045 485" fill="#2B8B57"/>
+
+  <path d="M510 560C410 520 350 470 300 395" stroke="#7D8798" stroke-width="7" stroke-linecap="round" stroke-dasharray="14 14"/>
+  <path d="M290 420L294 386L323 402" fill="#7D8798"/>
+
+  <text x="456" y="213" text-anchor="middle" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="20">activations</text>
+  <text x="855" y="213" text-anchor="middle" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="20">reconstruction residual</text>
+  <text x="1088" y="463" fill="#2B8B57" font-family="Arial, Helvetica, sans-serif" font-size="20">write if surprising</text>
+  <text x="282" y="496" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="20">retrieval remains similarity-based</text>
+
+  <text x="800" y="770" text-anchor="middle" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="22">Routine states are compressed efficiently. Critical and OOD states trigger structured residuals and selective writes.</text>
+</svg>

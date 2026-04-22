@@ -1,0 +1,49 @@
+<svg width="1400" height="900" viewBox="0 0 1400 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="900" rx="28" fill="#FBFCFF"/>
+  <text x="700" y="72" text-anchor="middle" fill="#101828" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">Temporal Dynamics of the Surprise Signal</text>
+  <text x="700" y="108" text-anchor="middle" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="22">Stylized recreation of Figure 2 from the paper</text>
+
+  <g transform="translate(110 170)">
+    <rect width="1180" height="160" rx="18" fill="white" stroke="#D9E0EC" stroke-width="2"/>
+    <rect x="18" y="18" width="126" height="124" rx="10" fill="#F4F6FB"/>
+    <line x1="60" y1="80" x2="1120" y2="80" stroke="#CAD4E3" stroke-dasharray="8 8"/>
+    <path d="M160 95C230 92 250 88 320 94C390 100 420 96 500 98C580 100 620 100 670 98C710 96 760 100 812 98C852 97 902 101 955 96C1010 91 1040 98 1090 95" stroke="#C27416" stroke-width="4"/>
+    <text x="1082" y="32" text-anchor="end" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="20">Routine</text>
+  </g>
+
+  <g transform="translate(110 392)">
+    <rect width="1180" height="160" rx="18" fill="white" stroke="#D9E0EC" stroke-width="2"/>
+    <rect x="18" y="18" width="126" height="124" rx="10" fill="#F4F6FB"/>
+    <line x1="60" y1="80" x2="1120" y2="80" stroke="#CAD4E3" stroke-dasharray="8 8"/>
+    <path d="M160 96C240 92 240 94 290 95C328 96 345 26 392 24C432 22 462 26 502 24C540 22 560 94 630 96C708 98 775 96 838 95C882 94 895 22 944 24C984 26 1002 24 1042 26C1070 28 1084 94 1094 95" stroke="#C27416" stroke-width="4"/>
+    <circle cx="342" cy="26" r="5" fill="#D92D20"/>
+    <circle cx="360" cy="22" r="5" fill="#D92D20"/>
+    <circle cx="378" cy="26" r="5" fill="#D92D20"/>
+    <circle cx="910" cy="24" r="5" fill="#D92D20"/>
+    <circle cx="928" cy="22" r="5" fill="#D92D20"/>
+    <circle cx="946" cy="26" r="5" fill="#D92D20"/>
+    <circle cx="406" cy="44" r="5" fill="#20BF6B"/>
+    <circle cx="970" cy="44" r="5" fill="#20BF6B"/>
+    <text x="1082" y="32" text-anchor="end" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="20">Critical</text>
+  </g>
+
+  <g transform="translate(110 614)">
+    <rect width="1180" height="160" rx="18" fill="white" stroke="#D9E0EC" stroke-width="2"/>
+    <rect x="18" y="18" width="126" height="124" rx="10" fill="#F4F6FB"/>
+    <line x1="60" y1="80" x2="1120" y2="80" stroke="#CAD4E3" stroke-dasharray="8 8"/>
+    <path d="M160 96C214 90 230 96 288 84C344 72 360 88 418 30C470 -18 560 16 630 20C700 24 734 2 790 74C832 126 852 16 892 14C932 12 958 20 996 30C1028 40 1040 64 1094 52" stroke="#C27416" stroke-width="4"/>
+    <circle cx="298" cy="72" r="5" fill="#D92D20"/>
+    <circle cx="330" cy="62" r="5" fill="#D92D20"/>
+    <circle cx="604" cy="16" r="5" fill="#D92D20"/>
+    <circle cx="642" cy="14" r="5" fill="#D92D20"/>
+    <circle cx="676" cy="20" r="5" fill="#D92D20"/>
+    <circle cx="860" cy="18" r="5" fill="#D92D20"/>
+    <circle cx="894" cy="14" r="5" fill="#D92D20"/>
+    <circle cx="930" cy="22" r="5" fill="#D92D20"/>
+    <circle cx="620" cy="44" r="5" fill="#20BF6B"/>
+    <circle cx="886" cy="46" r="5" fill="#20BF6B"/>
+    <text x="1082" y="32" text-anchor="end" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="20">OOD</text>
+  </g>
+
+  <text x="700" y="845" text-anchor="middle" fill="#667085" font-family="Arial, Helvetica, sans-serif" font-size="20">Dashed threshold line omitted for visual clarity: routine remains sub-threshold, critical triggers localized writes, and OOD yields higher-variance excursions.</text>
+</svg>
