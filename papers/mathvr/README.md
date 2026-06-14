@@ -17,6 +17,8 @@ MathVR pipeline:
 3. Receive conversational guidance with scaffolding and incremental hints.
 4. View synchronized visual explanations projected onto a virtual whiteboard via a tagging mechanism.
 
+The Unreal Engine client project from the paper is not included in this repository. Additional components can be published in separate updates.
+
 ## Acknowledgements
 
 This work builds on open-source tooling from Unreal Engine, Meta Quest SDK, OpenAI, and ElevenLabs.

@@ -17,6 +17,8 @@ Cards to Creatures pipeline:
 3. Retrieve the corresponding 3D mesh and texture from the pre-compiled Poke3D dataset.
 4. Render and spatially align the 3D model with the detected card in the AR scene.
 
+This directory includes the card-recognition and 3D-generation pipelines. The Unity AR client project from the paper is not included in this repository. Additional components can be published in separate updates.
+
 ## Acknowledgements
 
 This work builds on open-source tooling from Unity AR Foundation, Ultralytics YOLOv11, and the Hunyuan3D generative 3D ecosystem.

@@ -20,6 +20,8 @@ AIrtist pipeline:
 
 This directory includes Python utilities for stroke decomposition and the painting API used by the VR client.
 
+The Unity client project from the paper is not included in this repository. Additional components can be published in separate updates.
+
 ## Environment Setup
 
 Clone [Learning to Paint](https://github.com/hzwer/ICCV2019-LearningToPaint) next to the scripts you run (the code expects a sibling folder named `ICCV2019-LearningToPaint`):

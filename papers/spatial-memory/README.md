@@ -20,6 +20,8 @@ Spatial memory reconstruction pipeline:
 4. Correct or suppress background elements through localized panorama editing.
 5. Generate new objects via voice-driven 3D creation (Hunyuan3D).
 
+The Unity client project from the paper is not included in this repository. Additional components can be published in separate updates.
+
 ## Acknowledgements
 
 This work builds on open-source tooling from Unity, Meta Quest SDK, and generative 3D model ecosystems.
