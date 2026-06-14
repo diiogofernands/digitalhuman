@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Cards to Creatures | Interactive 3D Generation using GenAI</title>
+  <meta name="description" content="Project page for From Cards to Creatures: a mobile AR pipeline that transforms physical trading cards into interactive 3D models via YOLOv11 detection and Hunyuan3D-2.1 generation.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">SVR 2025 · 27th Symposium on Virtual and Augmented Reality</p>
+      <h1>From Cards to Creatures: Interactive 3D Generation using GenAI</h1>
+      <p class="subtitle">
+        A mobile AR system that transforms physical trading cards into interactive 3D creatures
+        by decoupling real-time card detection from offline generative 3D production, enabling
+        consistent, low-latency rendering without external markers or proprietary SDKs.
+      </p>
+
+      <div class="authors">
+        <span>Edward Scott Carvalho Johnson</span>
+        <span>Arthur Galdino Dangoni</span>
+        <span>Pedro Elias Engelberg Silva Borges</span>
+        <span>Diogo Fernandes Costa Silva</span>
+        <span>Arlindo Rodrigues Galvao Filho</span>
+      </div>
+
+      <p class="affiliation">
+        Advanced Knowledge Center for Immersive Technologies (AKCIT), Federal University of Goias
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="https://doi.org/10.1109/SVR67689.2025.00052">Paper</a>
+        <a class="button" href="../">All Projects</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section teaser">
+      <div class="container">
+        <img class="hero-figure" src="assets/images/pipeline.png" alt="The 3D visualization pipeline: card input, YOLOv11 card ID detection, 3D asset retrieval, AR rendering of Dubwool.">
+        <p class="caption">
+          The end-to-end inference pipeline: a physical card is detected by YOLOv11, the set and
+          collector number are extracted via PaddleOCR, the corresponding pre-generated 3D asset
+          is retrieved from the Poke3D dataset, and the creature is rendered anchored to the card in AR.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="abstract">
+      <div class="container narrow">
+        <h2>Abstract</h2>
+        <p>
+          From Cards to Creatures is a mobile augmented reality system that enables interactive
+          3D visualization of physical trading cards through generative AI. The pipeline combines
+          object detection, retrieval, and image-to-3D generation to support real-time rendering
+          anchored to physical inputs. A YOLOv11-based detector identifies and extracts the card's
+          unique ID from the mobile camera feed; PaddleOCR reads the set and collector number from
+          the localized region of interest. This ID enables instant retrieval of a corresponding
+          3D asset from the Poke3D dataset, where each card's artwork was pre-processed with
+          Hunyuan3D-2.1 to produce a PBR-compliant mesh and texture. By decoupling generation
+          from real-time capture, the system ensures consistent quality and sub-second latency.
+          Qualitative evaluation on Pokemon cards demonstrates accurate spatial alignment, coherent
+          shape generation, and responsive interaction across lighting conditions.
+        </p>
+      </div>
+    </section>
+
+    <section class="section alt" id="highlights">
+      <div class="container">
+        <h2>Why From Cards to Creatures</h2>
+        <div class="cards three">
+          <article class="card">
+            <h3>No Markers, No SDKs</h3>
+            <p>
+              Detection relies on the printed set and collector number already present on official
+              cards. No visual markers are embedded in the artwork and no proprietary tracking
+              libraries are required, making the system portable and free of licensing constraints.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Decoupled Generation and Rendering</h3>
+            <p>
+              Hunyuan3D-2.1 produces 3D assets offline from curated, background-free artwork crops.
+              At inference time only retrieval and rendering occur, yielding consistent quality
+              regardless of camera noise, lighting, or occlusion.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Scalable to Any Domain</h3>
+            <p>
+              The pipeline is domain-agnostic. Although demonstrated on Pokemon TCG, it extends
+              naturally to educational flashcards, museum exhibits, custom card games, or any
+              domain where physical artifacts should bridge to interactive 3D content.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="method">
+      <div class="container">
+        <div class="split">
+          <div>
+            <h2>Method</h2>
+            <ol class="steps">
+              <li><strong>Poke3D dataset construction (offline)</strong> -- retrieve high-resolution card scans and metadata from TCGdex; crop central artwork via layout templates; remove backgrounds with salient object detection; generate PBR-compliant 3D meshes with Hunyuan3D-2.1 (~5 MB per model); index each entry by set and collector number.</li>
+              <li><strong>Card detection</strong> -- a YOLOv11-based detector localizes the card in the mobile camera feed and produces a bounding box under varying lighting and viewing angles.</li>
+              <li><strong>ID extraction</strong> -- PaddleOCR reads the set name and collector number from the localized region of interest, providing the primary key for dataset lookup.</li>
+              <li><strong>3D asset retrieval</strong> -- the extracted ID queries the local Poke3D index and returns the pre-generated mesh and texture for that specific card's artwork.</li>
+              <li><strong>AR rendering</strong> -- the retrieved 3D model is anchored over the detected card's bounding box in real-time AR, maintaining spatial alignment across perspectives.</li>
+            </ol>
+          </div>
+          <div class="equation-box">
+            <h3>Inference Pipeline</h3>
+            <p><code>camera frame -&gt; YOLOv11 -&gt; bbox</code></p>
+            <p><code>bbox -&gt; PaddleOCR -&gt; card ID</code></p>
+            <p><code>card ID -&gt; Poke3D lookup -&gt; mesh</code></p>
+            <p><code>mesh + bbox -&gt; AR rendering</code></p>
+            <p class="small-note">
+              Generation (Hunyuan3D-2.1) and perception (YOLOv11) are fully decoupled.
+              Only retrieval and rendering run at inference time, enabling sub-second latency
+              on consumer-grade mobile hardware.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="figures">
+      <div class="container">
+        <h2>Selected Figures</h2>
+        <div class="figure-grid">
+          <figure class="panel">
+            <img src="assets/images/poke3d.png" alt="Figure 1: Poke3D dataset construction pipeline from Eevee card input through artwork extraction and background removal to 3D asset generation.">
+            <figcaption>
+              Poke3D dataset construction: the card illustration is isolated through artwork
+              extraction, background removal strips the scene to the subject alone, and
+              Hunyuan3D-2.1 converts the clean image into a textured 3D mesh.
+            </figcaption>
+          </figure>
+          <figure class="panel">
+            <img src="assets/images/ar-examples.png" alt="Figure 3: AR visualization examples for Joltik, Varoom, Jirachi, and Latios, each shown as original card and AR-rendered 3D creature.">
+            <figcaption>
+              AR visualization examples on a Samsung Galaxy S23. For each card (Joltik, Varoom,
+              Jirachi, Latios), the physical card is shown alongside the rendered 3D creature
+              anchored in real time to the detected bounding box.
+            </figcaption>
+          </figure>
+          <figure class="panel">
+            <img src="assets/images/results-3d.png" alt="Figure 4: 3D models generated from Wooloo, Rhyperior, Cyclizar, Rhyhorn, and Volcarona trading cards, shown from front and back.">
+            <figcaption>
+              3D model results: each row shows the original card image alongside front and back
+              views of the generated mesh, demonstrating color palette preservation, pose
+              consistency, and the limitations of single-image 3D reconstruction on complex textures.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="container">
+        <h2>Main Results</h2>
+        <div class="metrics-grid">
+          <article class="metric-card">
+            <span class="metric-value">&lt; 1 s</span>
+            <span class="metric-label">Retrieval and rendering latency</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-value">~5 MB</span>
+            <span class="metric-label">Average model size (uncompressed)</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-value">Stable</span>
+            <span class="metric-label">Alignment across lighting and perspective</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-value">Full series</span>
+            <span class="metric-label">Current Pokemon TCG expansions covered</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="contributions">
+      <div class="container">
+        <h2>Contributions</h2>
+        <div class="cards two">
+          <article class="card">
+            <h3>Markerless AR system for physical trading cards</h3>
+            <p>
+              An interactive AR pipeline that bridges physical cards and 3D generative content
+              using YOLOv11 detection and OCR on printed identifiers, without modifying card
+              artwork or depending on proprietary tracking libraries.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Poke3D dataset</h3>
+            <p>
+              The first dataset covering all cards from the current Pokemon TCG series, providing
+              high-resolution scans, gameplay metadata, background-free illustrations, and a
+              Hunyuan3D-2.1 generated 3D model for each card.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Decoupled perception and generation pipeline</h3>
+            <p>
+              Card ID-based retrieval of pre-generated assets separates the 3D generation stage
+              from real-time image capture, ensuring consistent mesh quality regardless of
+              runtime camera noise, lighting, or occlusion conditions.
+            </p>
+          </article>
+          <article class="card">
+            <h3>End-to-end mobile deployment</h3>
+            <p>
+              Sub-second retrieval and rendering on consumer-grade mobile hardware without
+              edge-cloud dependencies, demonstrated as a working AR application with the
+              complete current Pokemon TCG card series.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>From Cards to Creatures Project Page</span>
+    </div>
+  </footer>
+</body>
+</html>

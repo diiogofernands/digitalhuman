@@ -1,0 +1,15 @@
+__pycache__/
+
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
+
+*.png
+*.pdf
+*.jpg
+*.jpeg
+
+.DS_Store
+Thumbs.db

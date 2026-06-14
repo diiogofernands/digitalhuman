@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIrtist | VR Framework for Interactive Engagement via Stroke-Based Neural Rendering</title>
+  <meta name="description" content="Project page for AIrtist: an immersive VR framework bridging art appreciation and interactive painting via LLMs, DRL stroke decomposition, and PCA-based stroke analysis.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">IEEE AIxVR 2026</p>
+      <h1>AIrtist: VR Framework for Interactive Engagement via Stroke-Based Neural Rendering</h1>
+      <p class="subtitle">
+        An immersive VR framework that bridges art history education and interactive painting by
+        reverse-engineering a DRL painting agent into human-interpretable geometric stroke guides.
+      </p>
+
+      <div class="authors">
+        <span>Edward Scott Carvalho Johnson</span>
+        <span>Arthur Galdino Dangoni</span>
+        <span>Bianca Mirtes Araujo Miranda</span>
+        <span>Pedro Elias Engelberg Silva Borges</span>
+        <span>Diogo Fernandes</span>
+        <span>Arlindo Rodrigues Galvao Filho</span>
+      </div>
+
+      <p class="affiliation">
+        Advanced Knowledge Center for Immersive Technologies (AKCIT), Federal University of Goias
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="https://doi.org/10.1109/AIxVR67263.2026.00073">Paper</a>
+        <a class="button" href="../">All Projects</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section teaser">
+      <div class="container">
+        <img class="hero-figure" src="assets/images/studio.jpeg" alt="The virtual Van Gogh studio with the artist avatar and easel showing painting selection.">
+        <p class="caption">
+          The virtual artist's studio on Meta Quest 3. The Van Gogh avatar stands beside the easel
+          as a silent historical anchor while the user selects a painting to reconstruct.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="abstract">
+      <div class="container narrow">
+        <h2>Abstract</h2>
+        <p>
+          The preservation and dissemination of cultural heritage relies on accessibility, yet traditional
+          museum experiences remain passive, offering visual appreciation without procedural insight into
+          artistic creation. AIrtist is an immersive VR framework on the Meta Quest 3 that bridges art
+          appreciation and interactive engagement by focusing on the works of Vincent van Gogh. A theoretical
+          learning phase driven by LLMs and ElevenLabs TTS delivers contextual narration, while a gamified
+          painting phase grounded in Deep Reinforcement Learning guides users through reconstructing a
+          masterpiece stroke by stroke. A novel stroke analysis engine employing PCA and connected component
+          labeling on differential frame masks translates the black-box DRL output into geometric vector
+          guides rendered directly on the virtual canvas. Qualitative results demonstrate that the pipeline
+          successfully decomposes texture-rich paintings into coherent, interactive steps.
+        </p>
+      </div>
+    </section>
+
+    <section class="section alt" id="highlights">
+      <div class="container">
+        <h2>Why AIrtist</h2>
+        <div class="cards three">
+          <article class="card">
+            <h3>Procedural Art Insight</h3>
+            <p>
+              Static exhibitions offer observation, not participation. AIrtist makes the stepwise
+              construction of a masterpiece the learning object, giving users embodied procedural
+              understanding of Van Gogh's Impasto technique.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Reverse-Engineered DRL Output</h3>
+            <p>
+              The "Learning to Paint" model is a black box. AIrtist's stroke analysis engine converts
+              its incremental frame differences into PCA-derived geometric ellipses that a human can
+              follow inside VR.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Style-Agnostic Pipeline</h3>
+            <p>
+              Although the current implementation focuses on Van Gogh, the DRL decomposition and
+              stroke analysis pipeline is designed to generalize to any artist whose technique can
+              be decomposed by the painting model.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="method">
+      <div class="container">
+        <div class="split">
+          <div>
+            <h2>Method</h2>
+            <ol class="steps">
+              <li>Immerse the user in a minimalist virtual studio (Unity, Meta Quest 3) containing a central easel and a 3D avatar of Van Gogh generated via Gemini 2.5 Flash and Hunyuan3D 3.0.</li>
+              <li>Deliver LLM-generated art history narration synthesized by ElevenLabs TTS and displayed as subtitles, combining visual proximity with auditory explanation.</li>
+              <li>Run the "Learning to Paint" DRL agent on the target painting to produce a sequence of 400 incremental canvas frames.</li>
+              <li>For each consecutive frame pair (F<sub>t</sub>, F<sub>t+1</sub>), threshold the per-pixel color difference to isolate the newly added stroke as a binary mask M<sub>t</sub>.</li>
+              <li>Apply connected component labeling to group mask pixels, then PCA to extract the stroke's centroid, orientation, length, and width, fitting a geometric ellipse.</li>
+              <li>Render the ellipse as a ghost-stroke overlay on the virtual canvas; the user replicates each stroke with the VR controller, validated by collision with the guide zone.</li>
+            </ol>
+          </div>
+          <div class="equation-box">
+            <h3>Stroke Detection</h3>
+            <p><code>M<sub>t</sub>(x,y) = 1 if |F<sub>t+1</sub> - F<sub>t</sub>| &gt; tau</code></p>
+            <p><code>PCA(pixel coords of M<sub>t</sub>)</code></p>
+            <p><code>-&gt; centroid, orientation, ellipse</code></p>
+            <p class="small-note">
+              The first principal component gives stroke orientation; the ellipse acts as a
+              smoothed region-of-influence guide rasterized back onto the canvas for the VR overlay.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="figures">
+      <div class="container">
+        <h2>Selected Figures</h2>
+        <div class="figure-grid">
+          <figure class="panel">
+            <img src="assets/images/narration.jpeg" alt="Van Gogh avatar next to an educational panel showing art history narration delivered via LLM and TTS.">
+            <figcaption>
+              The theoretical learning module: the Van Gogh avatar stands beside an educational panel
+              while an LLM conditioned on verified art history sources delivers structured narration
+              via ElevenLabs TTS and subtitles.
+            </figcaption>
+          </figure>
+          <figure class="panel">
+            <img src="assets/images/stroke-pipeline.png" alt="Painting step pipeline: Base Canvas, Stroke Overlay, Stroke Vector (PCA), Stroke Guide, Updated Canvas.">
+            <figcaption>
+              The stroke analysis engine: per-frame difference generates a binary mask, connected
+              component labeling groups the fresh paint region, PCA extracts the principal axis,
+              and a geometric ellipse is fitted as the VR ghost-stroke guide.
+            </figcaption>
+          </figure>
+          <figure class="panel">
+            <img src="assets/images/decomposition.png" alt="DRL decomposition of two Van Gogh paintings across six incremental stages from blank canvas to completed image.">
+            <figcaption>
+              The "Learning to Paint" DRL agent decomposes two Van Gogh paintings across six
+              incremental stages, demonstrating that the pipeline generalizes beyond a single
+              work to different styles and compositions.
+            </figcaption>
+          </figure>
+          <figure class="panel">
+            <img src="assets/images/avatar.png" alt="3D Van Gogh avatar model shown from front, back, and side.">
+            <figcaption>
+              The 3D Van Gogh avatar generated via the Gemini 2.5 Flash and Hunyuan3D 3.0 pipeline,
+              serving as a silent historical anchor inside the studio rather than a conversational
+              partner, to avoid misrepresenting the artist.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="contributions">
+      <div class="container">
+        <h2>Contributions</h2>
+        <div class="cards two">
+          <article class="card">
+            <h3>Multi-modal theoretical learning module</h3>
+            <p>
+              Synthesizes verified art history context into audio-visual narratives via LLM conditioning
+              and TTS, delivering multimodal instruction aligned with dual-coding learning theory.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Novel stroke analysis engine</h3>
+            <p>
+              Reverses the output of DRL painting agents into geometric vector guides using differential
+              frame masking, connected component labeling, and PCA, overcoming the black-box nature of neural rendering.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Interactive paint-by-numbers on Quest 3</h3>
+            <p>
+              Integrates both modules on the Meta Quest 3 as a validated interaction loop where users
+              physically replicate each stroke, gaining embodied understanding of complex Impressionist composition.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Feasibility case for AI as structural guide</h3>
+            <p>
+              Demonstrates that AI can serve not just as a creator of art but as a structural decoder,
+              opening a new modality for cultural heritage appreciation beyond passive observation.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>AIrtist Project Page</span>
+    </div>
+  </footer>
+</body>
+</html>

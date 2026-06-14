@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MathVR | Personality-Based Agents for Mathematics Education in Virtual Reality</title>
+  <meta name="description" content="Project page for MathVR: LLM-driven VR tutoring with multimodal speech and sketch interaction for mathematics education.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">IEEE AIxVR 2026 · Work in Progress</p>
+      <h1>MathVR: Personality-Based Agents for Mathematics Education in Virtual Reality</h1>
+      <p class="subtitle">
+        An XR tutoring system where a Gemini-powered digital tutor guides learners through mathematics
+        via speech, handwritten sketches, and synchronized whiteboard projections, using guided discovery
+        rather than direct answers.
+      </p>
+
+      <div class="authors">
+        <span>Edward Scott Carvalho Johnson</span>
+        <span>Pedro Elias Engelberg Silva Borges</span>
+        <span>Arthur Galdino Dangoni</span>
+        <span>Davi Duarte de Freitas</span>
+        <span>Diogo Fernandes Costa Silva</span>
+        <span>Arlindo Rodrigues Galvao Filho</span>
+      </div>
+
+      <p class="affiliation">
+        Advanced Knowledge Center for Immersive Technologies (AKCIT), Federal University of Goias
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="https://doi.org/10.1109/AIxVR67263.2026.00036">Paper</a>
+        <a class="button" href="../">All Projects</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section teaser">
+      <div class="container">
+        <img class="hero-figure" src="assets/images/classroom.jpeg" alt="The MathVR virtual classroom with the MetaHuman tutor, whiteboard showing the Pythagorean theorem, and learner desk with a triangle sketch.">
+        <p class="caption">
+          The virtual classroom in MathVR: a MetaHuman tutor stands before a shared whiteboard
+          projecting a² = b² + c², while the learner's sketch of a triangle lies on the desk,
+          ready to be incorporated into the tutoring dialogue.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="abstract">
+      <div class="container narrow">
+        <h2>Abstract</h2>
+        <p>
+          MathVR is an extended reality system for immersive mathematics learning featuring an
+          LLM-driven tutor capable of answering questions and explaining concepts. Existing XR
+          applications often enhance visualization but lack adaptive conversational guidance.
+          MathVR addresses this gap through multimodal interaction: learners engage via speech and
+          handwritten sketches within a shared virtual workspace, while the tutor dynamically projects
+          visual information onto a whiteboard through a tagging mechanism, creating synchronized
+          verbal and visual guidance. Unlike traditional digital tutors, the conversational agent
+          employs guided discovery and scaffolding strategies rather than delivering direct solutions.
+          Preliminary user feedback from 12 participants indicates increased engagement and perceived
+          clarity, highlighting the feasibility of adaptive multimodal dialogue in immersive learning.
+        </p>
+      </div>
+    </section>
+
+    <section class="section alt" id="highlights">
+      <div class="container">
+        <h2>Why MathVR</h2>
+        <div class="cards three">
+          <article class="card">
+            <h3>Guided Discovery, Not Direct Answers</h3>
+            <p>
+              The system prompt encodes scaffolding strategies aligned with Vygotsky's Zone of Proximal
+              Development: the tutor delivers targeted hints and partial steps, encouraging independent
+              reasoning rather than passive reception.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Synchronized Verbal and Visual Guidance</h3>
+            <p>
+              A whiteboard-tag mechanism extracts <code>&lt;&lt;&gt;&gt;</code>-delimited content from
+              the LLM's responses and projects it as live annotations, combining speech and diagram
+              in a single coherent explanation following dual-coding principles.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Sketch-Aware Tutor</h3>
+            <p>
+              Learner handwriting on a virtual desk sheet is continuously captured and sent alongside
+              transcribed speech, allowing the tutor to incorporate the student's own drawings into
+              its reasoning and responses.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="method">
+      <div class="container">
+        <div class="split">
+          <div>
+            <h2>Method</h2>
+            <ol class="steps">
+              <li>Learner speech is transcribed in real time by OpenAI Whisper; handwritten sketches from a virtual desk sheet are captured continuously and forwarded alongside the transcript.</li>
+              <li>A conversational module based on Google ADK conditions Gemini 2.5 Flash with a scaffolding-based pedagogical prompt that prioritizes stepwise reasoning and deferred full solutions.</li>
+              <li>A callback module scans the model output for whiteboard tags; tagged content is extracted and rendered live on the shared virtual whiteboard, maintaining synchronized visual and verbal guidance.</li>
+              <li>Tag validity is enforced with regex-based validation; malformed tags are corrected programmatically or repaired via a secondary API call using the surrounding conversational context.</li>
+              <li>The model's response text is synthesized by ElevenLabs TTS and delivered through a MetaHuman digital tutor avatar, closing the multimodal interaction loop.</li>
+            </ol>
+          </div>
+          <div class="equation-box">
+            <h3>Interaction Loop</h3>
+            <p><code>speech + sketch -&gt; Whisper</code></p>
+            <p><code>-&gt; Gemini 2.5 Flash (ADK)</code></p>
+            <p><code>-&gt; tag callback -&gt; whiteboard</code></p>
+            <p><code>-&gt; ElevenLabs TTS -&gt; avatar</code></p>
+            <p class="small-note">
+              The whiteboard projection and voice delivery are decoupled: tag detection controls
+              visual output independently from the verbal TTS response.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="figures">
+      <div class="container">
+        <h2>Selected Figures</h2>
+        <div class="figure-grid">
+          <figure class="panel">
+            <img src="assets/images/dialogue-example.png" alt="Scaffolded dialogue example: the user asks how Bhaskara works and the tutor redirects to the Pythagorean theorem before answering.">
+            <figcaption>
+              A scaffolded dialogue exchange: when asked how the Bhaskara equation works, the tutor
+              first connects it to the Pythagorean theorem rather than providing a direct formula,
+              encouraging the learner to build understanding incrementally.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="container">
+        <h2>Main Results</h2>
+        <div class="metrics-grid">
+          <article class="metric-card">
+            <span class="metric-value">100%</span>
+            <span class="metric-label">Accuracy on 50 high-school math problems</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-value">4.42 / 5</span>
+            <span class="metric-label">Ease of use (mean, n=12)</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-value">6.00 / 7</span>
+            <span class="metric-label">Audio + whiteboard helped understanding</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-value">2.17 / 10</span>
+            <span class="metric-label">Frustration / stress felt (lower is better)</span>
+          </article>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Question (scale)</th>
+                <th>Mean</th>
+                <th>Median</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>The system was easy to use (1-5)</td>
+                <td>4.42</td>
+                <td>4.5</td>
+              </tr>
+              <tr>
+                <td>The functions of the system were well integrated (1-5)</td>
+                <td>4.33</td>
+                <td>4.0</td>
+              </tr>
+              <tr>
+                <td>I felt confident using the system (1-5)</td>
+                <td>3.92</td>
+                <td>4.0</td>
+              </tr>
+              <tr>
+                <td>Audio explanation and whiteboard writing helped my understanding (1-7)</td>
+                <td>6.00</td>
+                <td>6.0</td>
+              </tr>
+              <tr>
+                <td>The virtual classroom felt similar to a real classroom (1-7)</td>
+                <td>4.50</td>
+                <td>4.5</td>
+              </tr>
+              <tr>
+                <td>I would like to use this experience again to learn mathematics (1-7)</td>
+                <td>5.00</td>
+                <td>5.5</td>
+              </tr>
+              <tr>
+                <td>The experience increased my interest in learning mathematics (1-7)</td>
+                <td>4.42</td>
+                <td>4.5</td>
+              </tr>
+              <tr>
+                <td>How satisfied were you with your performance? (1-10)</td>
+                <td>8.17</td>
+                <td>8.0</td>
+              </tr>
+              <tr>
+                <td>How frustrated, stressed, or irritated did you feel? (1-10)</td>
+                <td>2.17</td>
+                <td>2.0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="contributions">
+      <div class="container">
+        <h2>Contributions</h2>
+        <div class="cards two">
+          <article class="card">
+            <h3>Multimodal tutoring loop in VR</h3>
+            <p>
+              A closed interaction loop integrating speech recognition (Whisper), sketch capture,
+              LLM-driven scaffolding (Gemini 2.5 Flash via ADK), and TTS delivery (ElevenLabs)
+              within a single coherent VR session.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Whiteboard-tag mechanism</h3>
+            <p>
+              A structured output protocol that enables the LLM to project synchronized visual
+              annotations onto a shared whiteboard mid-response, combining verbal and spatial
+              explanation in real time.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Scaffolding over direct answers</h3>
+            <p>
+              The pedagogical prompt encodes guided discovery principles, keeping the tutor from
+              giving away solutions and instead prompting incremental reasoning aligned with
+              ZPD and active learning frameworks.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Domain-agnostic architecture</h3>
+            <p>
+              Although focused on mathematics, the system is designed for any discipline that
+              depends on conceptual reasoning and visual representation, including physics,
+              chemistry, and language learning.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>MathVR Project Page</span>
+    </div>
+  </footer>
+</body>
+</html>

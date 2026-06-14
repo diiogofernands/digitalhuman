@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spatial Memory | Fine-Grained Spatial Scene Reconstruction for Adaptive Memory in VR</title>
+  <meta name="description" content="Project page for Fine-Grained Spatial Scene Reconstruction: a VR system that frames spatial memory recall as interactive scene editing rather than passive replay.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">IEEE VR 2026 · Workshop XRMemory</p>
+      <h1>Fine-Grained Spatial Scene Reconstruction for Adaptive Memory in Virtual Reality</h1>
+      <p class="subtitle">
+        A VR system that treats a remembered environment as an editable spatial artifact,
+        operationalizing constructive spatial memory recall through explicit insertion, movement,
+        cloning, and deletion of scene elements.
+      </p>
+
+      <div class="authors">
+        <span>Edward Scott Carvalho Johnson</span>
+        <span>Bianca Mirtes Araujo Miranda</span>
+        <span>Arthur Galdino Dangoni</span>
+        <span>Pedro Elias Engelberg Silva Borges</span>
+        <span>Diogo Fernandes Costa Silva</span>
+        <span>Arlindo Rodrigues Galvao Filho</span>
+      </div>
+
+      <p class="affiliation">
+        Advanced Knowledge Center for Immersive Technologies (AKCIT), Federal University of Goias
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="https://doi.org/10.1109/VRW70859.2026.00186">Paper</a>
+        <a class="button" href="../">All Projects</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section teaser">
+      <div class="container">
+        <img class="hero-figure" src="assets/images/overview.png" alt="Figure 1: Constructive spatial memory reconstruction as iterative scene editing, from panoramic scaffold to rebuilt environment.">
+        <p class="caption">
+          Constructive spatial memory reconstruction as iterative scene editing. From an initial
+          panoramic scaffold, the remembered environment is progressively rebuilt through explicit
+          insertion and adjustment of spatial cues, illustrating reconstruction as an active and
+          editable process rather than passive replay.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="abstract">
+      <div class="container narrow">
+        <h2>Abstract</h2>
+        <p>
+          Human spatial memory is reconstructive rather than veridical, relying on partial cues,
+          prior knowledge, and iterative refinement. Existing XR memory systems largely emphasize
+          capture fidelity and replay, offering limited support for this constructive process.
+          We present a VR system that frames spatial memory recall as interactive scene reconstruction
+          through explicit editing operations. The system treats a remembered environment as an
+          editable spatial artifact, supporting insertion, movement, cloning, and deletion of scene
+          elements. A hybrid approach combines a 360° panorama as an egocentric contextual scaffold
+          with manipulable 3D objects for fine-grained spatial adjustment, alongside localized panorama
+          editing for correction and suppression of background elements. By operationalizing
+          reconstruction as a sequence of visible edits, this work provides a foundation for studying
+          how XR tools shape remembered spatial scenes.
+        </p>
+      </div>
+    </section>
+
+    <section class="section alt" id="highlights">
+      <div class="container">
+        <h2>Why This Approach</h2>
+        <div class="cards three">
+          <article class="card">
+            <h3>Reconstruction Is Not Replay</h3>
+            <p>
+              Human remembering assembles scenes from partial cues guided by schemas, producing
+              adaptive generalization and systematic distortions. Passive replay cannot model this.
+              Explicit editing operators match how reconstruction already proceeds under uncertainty.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Hybrid Egocentric and Allocentric Representation</h3>
+            <p>
+              A 360° panorama reinstates view-based context supporting recall, while a 3D object
+              grid supports allocentric, layout-first reasoning. Both modes share the same four
+              reconstruction operators for consistent behavioral analysis.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Deletion as a First-Class Operation</h3>
+            <p>
+              Reconstruction is not purely additive. Suppressing misleading details is as cognitively
+              meaningful as inserting missing ones. The system treats panorama deletion as a primary
+              operation, not visual cleanup.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="method">
+      <div class="container">
+        <div class="split">
+          <div>
+            <h2>Method</h2>
+            <ol class="steps">
+              <li>Select a starting point: a 360° panorama from a library or generated by voice prompt (Skybox AI), providing an egocentric scaffold that reinstates layout and background cues.</li>
+              <li><strong>Insertion</strong> -- introduce a new manipulable 3D cue via voice description; the prompt is transcribed by Whisper, used to generate an object image (NanoBanana), and converted to a textured mesh (Hunyuan3D 2.1) inserted into the scene.</li>
+              <li><strong>Movement</strong> -- adjust a 3D object's position, orientation, and depth to refine spatial relations misaligned with the panorama structure.</li>
+              <li><strong>Cloning</strong> -- select a cubemap region from the panorama, extract and background-remove the patch, convert to a reusable 3D asset stored in the inventory.</li>
+              <li><strong>Deletion</strong> -- select a panorama region, apply instruction-guided inpainting to remove the target, reintegrate the edited patch into the cubemap, suppressing misleading contextual cues.</li>
+              <li>As an alternative to panorama mode, a 3D grid supports allocentric, layout-first reconstruction without a background layer.</li>
+            </ol>
+          </div>
+          <div class="equation-box">
+            <h3>Reconstruction Operators</h3>
+            <p><code>insertion -&gt; schema-guided completion</code></p>
+            <p><code>movement -&gt; spatial relation refinement</code></p>
+            <p><code>cloning -&gt; cue externalization</code></p>
+            <p><code>deletion -&gt; detail suppression</code></p>
+            <p class="small-note">
+              The four operators correspond to distinct cognitive processes in constructive
+              remembering. Generative components (Hunyuan3D, NanoBanana) are enabling
+              technology; the reconstruction grammar is the primary contribution.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="figures">
+      <div class="container">
+        <h2>Selected Figures</h2>
+        <div class="figure-grid">
+          <figure class="panel">
+            <img src="assets/images/voice-generation.png" alt="Figure 5: Voice-driven object generation. A spoken description is transcribed and converted into a manipulable 3D asset.">
+            <figcaption>
+              Voice-driven object insertion as a reconstruction operator: a spoken description
+              ("I want a high end grey office chair") is transcribed by Whisper, used to generate
+              an object image, and converted into a manipulable 3D asset placed in the scene.
+            </figcaption>
+          </figure>
+          <figure class="panel">
+            <img src="assets/images/panorama-cloning.png" alt="Figure 3: Panorama cloning showing (a) full panorama scene, (b) selected region with plant, (c) background-removed object, (d) resulting 3D model.">
+            <figcaption>
+              Panorama cloning: (a) the panoramic scene, (b) the selected region containing the
+              target object, (c) background-removed object depiction, (d) the resulting 3D model
+              reusable as a reconstruction cue in the scene inventory.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="contributions">
+      <div class="container">
+        <h2>Contributions</h2>
+        <div class="cards two">
+          <article class="card">
+            <h3>Interaction grammar for spatial memory reconstruction</h3>
+            <p>
+              A formal vocabulary of four first-class reconstruction operators: insertion,
+              movement, cloning, and deletion, that make the constructive process of spatial
+              recall explicit, observable, and analyzable.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Hybrid reconstruction approach</h3>
+            <p>
+              Combines a 360° panorama as an egocentric contextual scaffold with manipulable
+              3D object cues for fine-grained spatial adjustment, supporting both view-based context
+              and layout-first allocentric reasoning within a single system.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Localized panorama editing workflow</h3>
+            <p>
+              Enables removal and correction of scene elements as part of the reconstruction process,
+              treating suppression of background details as a memory operation rather than visual cleanup.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Foundation for behavioral XRMemory research</h3>
+            <p>
+              By making reconstruction actions traceable, the system enables future empirical study
+              of how particular edits influence spatial recall, confidence, and reinterpretation of
+              remembered environments under controlled conditions.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>Spatial Memory Project Page</span>
+    </div>
+  </footer>
+</body>
+</html>

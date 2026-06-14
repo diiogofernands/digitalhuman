@@ -1,0 +1,17 @@
+# Card data
+tcgdex-sdk
+pillow
+
+# Background removal
+transparent-background
+
+# YOLO training + inference
+ultralytics
+opencv-python
+
+# OCR + API
+paddleocr
+paddlepaddle-gpu
+fastapi
+uvicorn
+pydantic

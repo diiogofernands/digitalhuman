@@ -1,0 +1,17 @@
+__pycache__/
+
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+UserSettings/
+
+*.png
+*.pdf
+*.jpg
+*.jpeg
+
+.DS_Store
+Thumbs.db

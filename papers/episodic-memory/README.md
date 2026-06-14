@@ -4,7 +4,7 @@ Official implementation for the ReSuME paper at the ICLR 2026 Workshop on Memory
 
 For more information, see the paper on [OpenReview](https://openreview.net/forum?id=En9aRT4uz8).
 
-Project page: [GitHub Pages](https://diiogofernands.github.io/digitalhuman/).
+Project page: [GitHub Pages](https://diiogofernands.github.io/digitalhuman/episodic-memory/).
 
 ReSuME uses **SAE reconstruction error** as a surprise signal to decide when an LLM interaction should be written to episodic memory. Instead of heuristic write rules, the memory gate is driven by representational deviation from routine activation patterns.
 
